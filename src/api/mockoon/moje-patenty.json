@@ -11,13 +11,13 @@
       "uuid": "5908a8bf-a26e-4d5f-9a1f-26d3fa4285ab",
       "documentation": "",
       "method": "get",
-      "endpoint": "server-errors-test",
+      "endpoint": "login",
       "responses": [
         {
           "uuid": "3e41e8c9-4b80-4de8-965b-0c86e3327d28",
-          "body": "{\n  \"violations\": [\n    {\n      \"field\": \"firstName\",\n      \"value\": \"dasd@\",\n      \"message\": \"Błędny imię\"\n    },\n    {\n      \"field\": \"email\",\n      \"value\": \"dasd@\",\n      \"message\": \"Błędny adres email\"\n    }\n  ]\n}",
+          "body": "{\n  \"violations\": [\n    {\n      \"field\": \"password\",\n      \"value\": \"dasd@\",\n      \"message\": \"Błędny dane logowania\"\n    }\n  ]\n}",
           "latency": 0,
-          "statusCode": 400,
+          "statusCode": 200,
           "label": "",
           "headers": [],
           "filePath": "",

@@ -6,6 +6,8 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from './authentication.service';
+import { LoginService } from '@app/auth/login.service';
+import { ServerErrorService } from '@shared/services/server-error.service';
 
 const log = new Logger('Login');
 
@@ -25,7 +27,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private loginService: LoginService,
+    private ses: ServerErrorService
   ) {
     this.createForm();
   }
@@ -34,25 +38,37 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-    const login$ = this.authenticationService.login(this.loginForm.value);
-    login$
+
+    this.loginService
+      .login(this.loginForm.value)
       .pipe(
         finalize(() => {
-          this.loginForm.markAsPristine();
           this.isLoading = false;
-        }),
-        untilDestroyed(this)
+        })
       )
-      .subscribe(
-        (credentials) => {
-          log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
-        },
-        (error) => {
-          log.debug(`Login error: ${error}`);
-          this.error = error;
+      .subscribe((loginResp: any) => {
+        if (this.ses.handleErrors(loginResp, this.loginForm)) {
+          const login$ = this.authenticationService.login(this.loginForm.value);
+          login$
+            .pipe(
+              finalize(() => {
+                this.loginForm.markAsPristine();
+                this.isLoading = false;
+              }),
+              untilDestroyed(this)
+            )
+            .subscribe(
+              (credentials) => {
+                log.debug(`${credentials.username} successfully logged in`);
+                this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
+              },
+              (error) => {
+                log.debug(`Login error: ${error}`);
+                this.error = error;
+              }
+            );
         }
-      );
+      });
   }
 
   private createForm() {

@@ -21,9 +21,10 @@
               [placeholder]="'Username' | translate"
               required
             />
-            <mat-error *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
-              <span translate>Username is required</span>
-            </mat-error>
+            <mat-error matErrorMessages></mat-error>
+            <!--            <mat-error *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">-->
+            <!--              <span translate>Username is required</span>-->
+            <!--            </mat-error>-->
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
             <input
@@ -34,9 +35,10 @@
               [placeholder]="'Password' | translate"
               required
             />
-            <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-              <span translate>Password is required</span>
-            </mat-error>
+            <mat-error matErrorMessages></mat-error>
+            <!--            <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">-->
+            <!--              <span translate>Password is required</span>-->
+            <!--            </mat-error>-->
           </mat-form-field>
           <mat-slide-toggle color="primary" formControlName="remember" translate>Remember me</mat-slide-toggle>
           <br />
