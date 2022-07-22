@@ -1,0 +1,68 @@
+{
+  "uuid": "1ce40f4e-596e-4925-a102-9ce9b36168b9",
+  "lastMigration": 20,
+  "name": "Moje patenty",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "5908a8bf-a26e-4d5f-9a1f-26d3fa4285ab",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "server-errors-test",
+      "responses": [
+        {
+          "uuid": "3e41e8c9-4b80-4de8-965b-0c86e3327d28",
+          "body": "{\n  \"violations\": [\n    {\n      \"field\": \"firstName\",\n      \"value\": \"dasd@\",\n      \"message\": \"Błędny imię\"\n    },\n    {\n      \"field\": \"email\",\n      \"value\": \"dasd@\",\n      \"message\": \"Błędny adres email\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
